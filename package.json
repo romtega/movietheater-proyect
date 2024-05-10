@@ -1,0 +1,11 @@
+{
+  "name": "movietheater-proyect",
+  "version": "1.0.0",
+  "description": "movie theater api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RoM",
+  "license": "ISC"
+}
