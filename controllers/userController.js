@@ -3,6 +3,10 @@
 /* eslint-disable semi */
 import User from "../models/User.js";
 
+const handleServerError = (res, error) => {
+  res.status(500).json({ message: error.message });
+};
+
 const createUser = async (req, res) => {
   const userData = req.body;
   try {
@@ -13,7 +17,7 @@ const createUser = async (req, res) => {
     await newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    handleServerError(res, error);
   }
 };
 
@@ -27,7 +31,7 @@ const getUsers = async (req, res) => {
     }
     res.status(200).json(users);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    handleServerError(res, error);
   }
 };
 
@@ -40,7 +44,7 @@ const getUserById = async (req, res) => {
     }
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    handleServerError(res, error);
   }
 };
 
@@ -57,7 +61,7 @@ const updateUser = async (req, res) => {
     }
     res.status(200).json(updatedUser);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    handleServerError(res, error);
   }
 };
 
@@ -71,8 +75,8 @@ const deleteUser = async (req, res) => {
         return res.status(404).json({ msg: "User not found" });
       }
       return res.status(204).json();
-    } catch (err) {
-      res.status(400).json({ error: err.message });
+    } catch (error) {
+      handleServerError(res, error);
     }
   }
 
@@ -87,7 +91,7 @@ const deleteUser = async (req, res) => {
     }
     res.status(204).json();
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    handleServerError(res, error);
   }
 };
 
